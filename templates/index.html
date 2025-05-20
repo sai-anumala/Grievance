@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Grievance Submission</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+ <style>
+    /* Fade-in animation */
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    body {
+      background: linear-gradient(to bottom right, #ffe4e1, #fceff1);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container.mt-5 {
+      max-width: 600px;
+      margin: 50px auto;
+      background-color: #fff0f5;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(255, 182, 193, 0.3);
+      padding: 30px;
+      animation: fadeIn 1s ease-in-out;
+    }
+.form-label {
+  margin-bottom: 6px; /* Add spacing below each label */
+  display: inline-block; /* Ensures margin-bottom works properly */
+}
+    .card {
+      background-color: #fdf0f5;
+      border-radius: 1rem;
+      box-shadow: 0 5px 15px rgba(255, 192, 203, 0.2);
+      padding: 20px;
+    }
+
+    .card-body {
+      background-color: #fadadd;
+      border-radius: 1rem;
+      padding: 25px;
+    }
+
+    h3.card-title {
+      color: #c71585;
+      text-align: center;
+      margin-bottom: 5px;
+    }
+
+    .quote {
+      text-align: center;
+      color: #a05278;
+      font-style: italic;
+      margin-bottom: 25px;
+    }
+
+    .form-label {
+      color: #a05278;
+      font-weight: bold;
+    }
+
+    .form-label::before {
+      content: " ";
+      color: #ff69b4;
+    }
+
+    .form-control, .form-select {
+      border-radius: 0.5rem;
+      border: 1px solid #ffc0cb;
+      padding: 10px;
+      font-size: 14px;
+      background-color: #fff;
+    }
+
+    .btn-primary {
+      background-color: #ff69b4;
+      border: none;
+      border-radius: 0.5rem;
+      padding: 12px 24px;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: block;
+      margin: 20px auto 0;
+    }
+
+    .btn-primary:hover {
+      background-color: #ff1493;
+    }
+
+    /* Optional Audio styling (hidden by default) */
+    audio {
+      display: none;
+    }
+    form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  gap: 10px; /* Add spacing between form items */
+}
+  </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="alert alert-success" role="alert" style="text-align:center;">
+      {{ messages[0] }}
+    </div>
+  {% endif %}
+{% endwith %}
+  <div class="card shadow rounded-4">
+    <div class="card-body">
+      <h3 class="card-title">♡ Submit a Grievance</h3>
+      <form action="/submit-grievance" method="POST">
+        
+        <!-- Title -->
+        <div class="mb-3">
+          <label for="title" class="form-label">Grievance Title</label><br/>
+          <input type="text" class="form-control" id="title" name="title" required>
+        </div>
+
+        <!-- Reason -->
+        <div class="mb-3">
+          <label for="reason" class="form-label">Reason / Description</label><br/>
+          <textarea class="form-control" id="reason" name="reason" rows="4" required></textarea>
+        </div>
+
+        <!-- Mood -->
+        <div class="mb-3">
+          <label for="mood" class="form-label">Mood</label><br/>
+          <select class="form-select" id="mood" name="mood" required>
+            <option value="" disabled selected></option>
+            <option value="Angry">Angry</option>
+            <option value="Sad">Sad</option>
+            <option value="Frustrated">Frustrated</option>
+            <option value="Disappointed">Disappointed</option>
+            <option value="Neutral">Neutral</option>
+          </select>
+        </div>
+
+        <!-- Severity -->
+        <div class="mb-3">
+          <label for="severity" class="form-label">Severity</label><br/>
+          <select  class="form-select" id="severity" name="severity" required>
+            <option value="" disabled selected></option>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+            <option value="Critical">Critical</option>
+          </select>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">♡ Submit Grievance</button>
+        
+      </form>
+    </div>
+  </div>
+</div>
+
+</body>
+<script>
+  document.querySelector('form').addEventListener('submit', function(event) {
+    alert('Your grievance has been submitted successfully!');
+  });
+</script>
+</html>
